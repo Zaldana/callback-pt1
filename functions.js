@@ -16,6 +16,13 @@ const first = function (array, n) {
 
 };
 
+//One line solution
+// const first = function (array, n) {
+
+//   return n === undefined ? array[0] : array.slice(0, n);
+
+// };
+
 //////////////////////////////////////////////
 const last = function (array, n) {
 
@@ -32,8 +39,20 @@ const last = function (array, n) {
   }
 
   return array.slice(n - 1, array.length)
+  
+  //alternate and do not need n >array.length case
+  // if (n) {
+  //return array.slice(Math.max(0, array.length - n));
+//}
 
 };
+
+//One line solution
+//const last = function (array, n) {
+// return n === undefined
+//   ? array[array.length - 1]
+//   : array.slice(Math.max(0, array.length - n));
+// };
 
 ////////////////////////////////////////////////
 const each = function (collection, callback) {
@@ -57,16 +76,43 @@ const each = function (collection, callback) {
 ////////////////////////////////////////////////
 const indexOf = function (array, target) {
 
-  return array.findIndex((el) => el === target);
+  let result = -1;
+  let arr = [];
+
+  each(array, function (item, index, collection){
+
+    if (item === target) {
+
+      arr.push(index);
+      result = arr[0];
+      return result
+      
+    } 
+ 
+  })
+
+  return result
 
 };
+  
 
 //////////////////////////////////////////////////
 const map = function (collection, iterator) {
 
-  return collection.map((el) => iterator(el));
+  let newArray = [];
+
+  each(collection, function (item, index, collectionArray) {
+
+    let newItem = iterator(item);
+    newArray.push(newItem);
+
+  })
+
+  return newArray;
 
 };
+
+
 
 module.exports = {
   identity,
